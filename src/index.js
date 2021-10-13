@@ -5,6 +5,8 @@ const fname = "Alastair";
 const lname = "Tooth";
 const num = Math.floor(Math.random() * 10);
 
+
+// Test Code
 const customStyle = {
   color: "blue",
   fontSize: "20px",
