@@ -1,42 +1,40 @@
 import React, { useState } from "react";
-
+import List from './Item';
 
 function App() {
-  const [headingText, setHeadingText] = useState("");
-  const [buttonColour, setButtonColour] = useState(true);
-  const [name, setName] = useState("");
-
-  function handleClick() {
-    setHeadingText("Submitted")
-  }
-  function handleOver() {
-    setButtonColour(false)
-  }
-  function handleOut() {
-    setButtonColour(true)
-  }
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
 
   function handleChange(event) {
-    setName(event.target.value)
+    const newValue = event.target.value;
+    setInputText(newValue);
+  }
+
+  function addItem() {
+    setItems(prevItems => {
+      return [...prevItems, inputText];
+    });
+    setInputText("");
   }
 
   return (
     <div className="container">
-      <h1>Hello {name}</h1>
-      <input
-        onChange={handleChange}
-        type="text"
-        placeholder="What's your name?"
-        value={name}
-      />
-      <button
-        style={{ backgroundColor: buttonColour ? "white" : "black" }}
-        onClick={handleClick}
-        onMouseOver={handleOver}
-        onMouseOut={handleOut}>
-        Submit
-      </button>
-      <p>{headingText}</p>
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={handleChange} type="text" value={inputText} />
+        <button onClick={addItem}>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          {items.map(todoItem => (
+            <List item={todoItem} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

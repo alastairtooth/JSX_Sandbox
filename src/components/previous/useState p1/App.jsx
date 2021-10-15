@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function App() {
 
   let time = new Date().toLocaleTimeString();
-
   const [currentTime, checkTime] = useState(time, check);
 
   function check() {
